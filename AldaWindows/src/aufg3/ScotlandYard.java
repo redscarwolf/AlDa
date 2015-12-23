@@ -19,6 +19,9 @@ import java.util.Scanner;
  * @since 27.01.2015
  */
 public class ScotlandYard {
+	private static final int TAXI_WEIGHT = 2;
+	private static final int BUS_WEIGHT = 3;
+	private static final int UBAHN_WEIGHT = 5;
 
 	/**
 	 * Fabrikmethode zur Erzeugung eines Graphen für den Scotland-Yard-Spielplan.
@@ -34,10 +37,33 @@ public class ScotlandYard {
 	public static Graph<Integer> getGraph() throws FileNotFoundException {
 
 		Graph<Integer> sy_graph = new AdjacencyListUndirectedGraph<Integer>();
-		Scanner in = new Scanner(new File("ScotlandYard_Kanten.txt"));
-
-		// ...
+		//TODO: windows-linux
+		// Scanner in = new Scanner(new File("src/aufg3/ScotlandYard_Kanten.txt")); // Linux
+		Scanner in = new Scanner(new File("src\\aufg3\\ScotlandYard_KantenTest.txt")); // Windows
 		
+		while (in.hasNextLine()) {
+			int v,w, weight;
+			String transport;
+			v = in.nextInt();
+			w = in.nextInt();
+			transport = in.next();
+			switch (transport) {
+			case "Taxi":
+				weight = TAXI_WEIGHT;
+				break;
+			case "Bus":
+				weight = BUS_WEIGHT;
+				break;
+			case "UBahn":
+				weight = UBAHN_WEIGHT;
+				break;
+			default:
+				weight = 1;
+			}
+			System.out.printf("%d %d %d %n",v, w, weight);
+		}
+		System.out.println("ende");
+		in.close();
 		return sy_graph;
 	}
 

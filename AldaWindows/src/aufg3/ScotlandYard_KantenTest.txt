@@ -1,0 +1,7 @@
+1 9 Taxi
+1 8 Taxi
+1 46 Bus
+1 58 Bus
+1 46 UBahn
+2 20 Taxi
+2 10 Taxi

@@ -1,6 +1,11 @@
 package aufg3;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import aufg2.AdjacencyListUndirectedGraph;
 import aufg2.Edge;
@@ -9,7 +14,52 @@ import aufg2.Graph;
 public class myApp {
 
 	public static void main(String[] args) {
+		/*
+		PriorityList<Integer> prioList = new PriorityList<>();
+		Integer v0 = 0;
+		Integer v1 = 1;
+		Integer v2 = 2;
+		
+		prioList.insert(v0, 0.0);
+		prioList.insert(v2, 6.);
+		prioList.insert(v1, 1.);
+		prioList.print();
+		
+		Integer i = prioList.deleteMin();
+		prioList.deleteMin();
+		System.out.println(i);
+		prioList.print();
+		
+		if (!prioList.change(2, 7.0)) {
+			System.out.println("ERROR change returned false: Vertex is not in PrioList.");
+		}
+		prioList.print();
+		
+		System.out.println(prioList.isEmty());
+		*/
+		
+		/*
+		// init
+		Integer v0 = 0; // start Vertex
 		Graph<Integer> g = createGraph();
+		
+		ShortestPath<Integer> sySp = new ShortestPath<Integer>(g, null);
+	
+		// do
+		sySp.searchShortestPath(2, 4);
+		List<Integer> l = sySp.getShortestPath();
+		double dis = sySp.getDistance();
+		System.out.println(l);
+		System.out.println(dis);
+		*/
+		try {
+			ScotlandYard.getGraph();
+		} catch (FileNotFoundException ex) {
+			System.out.printf("FileNotFound %n");
+		}
+		
+		
+		/*Graph<Integer> g = createGraph();
 		ShortestPath<Integer> sySp = new ShortestPath<Integer>(g, null);
 		
 		sySp.searchShortestPath(65,157);
@@ -20,6 +70,7 @@ public class myApp {
 
 		sySp.searchShortestPath(1,173);
 		System.out.println("Distance = " + sySp.getDistance()); // 22.0
+		*/
 	}
 	
 	private static AdjacencyListUndirectedGraph<Integer> createGraph() {
@@ -51,7 +102,7 @@ public class myApp {
 		undg.addEdge(v0, v3, 2);
 		undg.addEdge(v0, v4, 2);
 		undg.addEdge(v1, v2, 4);
-		undg.addEdge(v1, v5, 2);
+		undg.addEdge(v1, v5, 5);
 		undg.addEdge(v2, v3, 3);
 		undg.addEdge(v2, v7, 8);
 		undg.addEdge(v4, v5, 4);
