@@ -69,7 +69,8 @@ public class AdjacencyListDirectedGraph<V> implements DirectedGraph<V> {
     public boolean addVertex(V o) {
         // Test if Nodes != NULL
         checkArguments(o);
-
+        
+        //TODO nur hinzufügen wenn nicht schon enthalten! Siehe AdjUndirectedGraph
         boolean returnValue = out.containsKey(o);
         in.put(o, new HashMap<V, Double>());
         out.put(o, new HashMap<V, Double>());

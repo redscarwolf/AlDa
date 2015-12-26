@@ -1,11 +1,13 @@
 package aufg3;
 
 import aufg2.*;
+
 import java.io.FileNotFoundException;
+
 import sim.SYSimulation;
+
 import java.awt.Color;
 import java.io.IOException;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -39,11 +41,13 @@ public class ScotlandYard {
 		Graph<Integer> sy_graph = new AdjacencyListUndirectedGraph<Integer>();
 		//TODO: windows-linux
 		// Scanner in = new Scanner(new File("src/aufg3/ScotlandYard_Kanten.txt")); // Linux
-		Scanner in = new Scanner(new File("src\\aufg3\\ScotlandYard_KantenTest.txt")); // Windows
+		Scanner in = new Scanner(new File("src\\aufg3\\ScotlandYard_Kanten.txt")); // Windows
 		
 		while (in.hasNextLine()) {
 			int v,w, weight;
 			String transport;
+			
+			// get data
 			v = in.nextInt();
 			w = in.nextInt();
 			transport = in.next();
@@ -61,8 +65,19 @@ public class ScotlandYard {
 				weight = 1;
 			}
 			System.out.printf("%d %d %d %n",v, w, weight);
+			
+			// process data
+			sy_graph.addVertex(v);
+			sy_graph.addVertex(w);
+			double oldWeight = sy_graph.getWeight(v, w);
+			if (oldWeight == 0 || oldWeight > weight) { // no Edge OR new weight is smaller
+				sy_graph.addEdge(v, w, weight);
+			}
 		}
-		System.out.println("ende");
+		// show all edges
+   		List<Edge<Integer>> edgeList = sy_graph.getEdgeList();
+   		System.out.println(edgeList);
+   		
 		in.close();
 		return sy_graph;
 	}

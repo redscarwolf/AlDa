@@ -29,10 +29,11 @@ public class AdjacencyListUndirectedGraph<V> implements UndirectedGraph<V> {
     @Override
     public boolean addVertex(V v) {
         // fuer ruegabewert abfragen ob enthalten
-        boolean returnValue = data.containsKey(v);
-        // fuege Knoten in 1er HashMap ein
-        data.put(v, new HashMap<V, Double>());
-        
+        boolean returnValue = !data.containsKey(v);
+        if (returnValue) {
+        	// fuege Knoten in 1er HashMap ein
+        	data.put(v, new HashMap<V, Double>());
+        }
         return returnValue;
     }
 
