@@ -26,11 +26,33 @@ public class PriorityList<V> {
 
 	public V deleteMin() {
 		// find Entry with least distance
-		Double min = 999.9;
+		Double min = 9999.9;
 		Entry<V, Double> entry = new Entry<>(null, null);
 		for (Entry<V, Double> li : list) {
 			if (li.distance < min) {
 				min = li.distance;
+				entry = li; // save found Entry with least distance
+			}
+		}
+
+		// remove entry
+		if (!list.remove(entry))
+			System.out.println("ERROR: entry is not in the List.");
+
+		return entry.v;
+	}
+	
+	public V deleteMin(Heuristic<V> heuristic, V z) {
+		// find Entry with least distance
+		Double min = 9999.9;
+		Double euclDistance;
+		Entry<V, Double> entry = new Entry<>(null, null);
+		
+		for (Entry<V, Double> li : list) {
+			euclDistance = li.distance 
+					+ heuristic.estimatedCost((Integer) li.v, (Integer) z);
+			if (euclDistance < min) {
+				min = euclDistance;
 				entry = li; // save found Entry with least distance
 			}
 		}

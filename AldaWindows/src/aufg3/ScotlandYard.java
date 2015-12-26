@@ -107,7 +107,7 @@ public class ScotlandYard {
 	public static void main(String[] args) throws FileNotFoundException {
 		Graph<Integer> syGraph = getGraph();
 		Heuristic<Integer> syHeuristic = getHeuristic();
-		ShortestPath<Integer> sySp = new ShortestPath<Integer>(syGraph,syHeuristic);
+		ShortestPath<Integer> sySp = new ShortestPath<Integer>(syGraph, syHeuristic);
 		
 		sySp.searchShortestPath(65,157);
 		System.out.println("Distance = " + sySp.getDistance()); // 9.0
@@ -134,7 +134,6 @@ public class ScotlandYard {
 		//sySp.searchShortestPath(1,175); //25.0
 		
 		sySp.searchShortestPath(1,173); //22.0
-        		
 		System.out.println("Distance = " + sySp.getDistance());
 		List<Integer> sp = sySp.getShortestPath();
 
@@ -152,20 +151,66 @@ public class ScotlandYard {
 }
 
 class ScotlandYardHeuristic implements Heuristic<Integer> {
-	// ...
+	Map<Integer, Entry> vertexCoordinates = new HashMap<Integer, Entry>();
 
 	public ScotlandYardHeuristic() throws FileNotFoundException {
-		// Lese Koordinaten von ScotlandYard_Knoten.txt in eine Map.
+		//TODO: windows-linux
+		// Scanner in = new Scanner(new File("src/aufg3/ScotlandYard_Knoten.txt")); // Linux
+		Scanner in = new Scanner(new File("src\\aufg3\\ScotlandYard_Knoten.txt")); // Windows
 		
-		// ...
+		while (in.hasNextLine()) {
+			int v;
+			double x, y;
+			
+			// get data
+			v = in.nextInt();
+			x = in.nextDouble();
+			y = in.nextDouble();
+			// System.out.printf("%d %f %f %n",v, x, y);
+			
+			// save data in map
+			vertexCoordinates.put(v, new Entry(x, y));
+		}
+		in.close();
 	}
-
+	
+	private static class Entry {
+		double x;
+		double y;
+		
+		public Entry(double x, double y) {
+			this.x = x;
+			this.y = y;
+		}
+	}
+	
+	@Override
 	public double estimatedCost(Integer u, Integer v) {
+		// Checks
+		if (!vertexCoordinates.containsKey(u)) {
+			throw new IllegalArgumentException("ERROR: Vertex u is not in vertexCoordinates-Map.");
+		}
+		if (!vertexCoordinates.containsKey(v)) {
+			throw new IllegalArgumentException("ERROR: Vertex v is not in vertexCoordinates-Map.");
+		}
+		
 		// Berechne Euklidischen Abstand zwischen
 		// Knoten u und v in Pixeleinheiten.
-		// Skaliere Rückgabewert mit Faktor 1/10 bis 1/80.
+		double x1, x2, y1, y2, distance;
+		x1 = vertexCoordinates.get(u).x;
+		y1 = vertexCoordinates.get(u).y;
 		
-		// ...
+		x2 = vertexCoordinates.get(v).y;
+		y2 = vertexCoordinates.get(v).y;
+		
+		// Pythagoras Theorem
+		distance = Math.sqrt(Math.pow(x2 -x1, 2) + Math.pow(y2 -y1, 2));
+		System.out.printf("Reale Distanz: %f%n", distance);
+		
+		// Skaliere Rueckgabewert mit Faktor 1/10 bis 1/80.
+		distance /= 10.0;
+		System.out.printf("Gewichtete Distanz: %f%n", distance);
+		return distance;
 	}
 }
 

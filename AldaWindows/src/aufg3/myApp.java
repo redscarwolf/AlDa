@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import sim.SYSimulation;
 import aufg2.AdjacencyListUndirectedGraph;
 import aufg2.Edge;
 import aufg2.Graph;
@@ -14,6 +15,20 @@ import aufg2.Graph;
 public class myApp {
 
 	public static void main(String[] args) {
+		
+		//Heuristic Test
+		ScotlandYardHeuristic SYHeuristic;
+		try {
+			SYHeuristic = new ScotlandYardHeuristic();
+		} catch(IOException e) {
+			System.out.println("File net da");
+			return;
+		}
+		SYHeuristic.estimatedCost(11, 1);
+		SYHeuristic.estimatedCost(11, 1);
+		
+		//Heuristic Ende
+		
 		/*
 		PriorityList<Integer> prioList = new PriorityList<>();
 		Integer v0 = 0;
@@ -52,12 +67,14 @@ public class myApp {
 		System.out.println(l);
 		System.out.println(dis);
 		*/
+		
+		/*
 		try {
 			ScotlandYard.getGraph();
 		} catch (FileNotFoundException ex) {
 			System.out.printf("FileNotFound %n");
 		}
-		
+		*/
 		
 		/*Graph<Integer> g = createGraph();
 		ShortestPath<Integer> sySp = new ShortestPath<Integer>(g, null);

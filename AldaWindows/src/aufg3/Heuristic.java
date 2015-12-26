@@ -1,5 +1,12 @@
 package aufg3;
 
 public interface Heuristic<T> {
-	//TODO Methoden auflisten für Heurustic siehe ScotlendVard.java 
+	
+	/**
+	 * Erhalte Euklidischen Abstand zwischen u und v
+	 * @param u Startknoten
+	 * @param v Zielknoten
+	 * @return Euklidischer Abstand
+	 */
+	public double estimatedCost(Integer u, Integer v); 
 }
