@@ -9,6 +9,8 @@ import aufg2.*;
 import sim.SYSimulation;
 
 public class ShortestPath<V> {
+
+	private static final boolean A_FLAG = false;
 	
 	private HashMap<V, Double> d;
 	private HashMap<V, V> p;
@@ -28,10 +30,10 @@ public class ShortestPath<V> {
 	}
 	
 	private boolean shortestPath_A(V s,
-								V z,
-								Graph<V> graph,
-								HashMap<V, Double> d,
-								HashMap<V, V> p) {
+								   V z,
+								   Graph<V> graph,
+								   HashMap<V, Double> d,
+								   HashMap<V, V> p) {
 		
 		if (!graph.containsVertex(s)) {
 			throw new IllegalArgumentException("ERROR: start Vertex s is not in g.");
@@ -44,7 +46,7 @@ public class ShortestPath<V> {
 		PriorityList<V> kl = new PriorityList<>();
 		
 		for (V vb : graph.getVertexList()) {
-			d.put(vb, 999.9);
+			d.put(vb, 9999.9);
 			p.put(vb, null);
 		}
 		
@@ -57,15 +59,16 @@ public class ShortestPath<V> {
 		while(!kl.isEmty()) {
 			V v = kl.deleteMin(heuristic, z);  // get deleted Vertex v with least distance
 			if (sim != null) sim.visitStation((Integer) v, Color.blue);
-			if (v == z) { // reached target Vertex
+			//System.out.printf("v=%d <--> z=%d%n", v, z);
+			if (v.equals(z)) { // reached target Vertex
 				return true;
 			}
 			
 			for (V w : graph.getAdjacentVertexList(v)) {
-				if (sim != null) sim.drive((Integer) v, (Integer) w, Color.cyan);
+				//if (sim != null) sim.drive((Integer) v, (Integer) w, Color.cyan);
 				
-				if (d.get(w) == 999.9) {  // w not been visited add to kl
-					kl.insert(w, 999.9);  // add w and the distance from v to w, to the PriorityList
+				if (d.get(w) == 9999.9) {  // w not been visited add to kl
+					kl.insert(w, 9999.9);  // add w and the distance from v to w, to the PriorityList
 				}
 				if (d.get(v) + graph.getWeight(v, w) < d.get(w)) {
 					// update p and d
@@ -108,7 +111,7 @@ public class ShortestPath<V> {
         	if (sim != null) sim.visitStation((Integer) v, Color.blue);
         	
         	for (V w : graph.getAdjacentVertexList(v)) {
-        		if (sim != null) sim.drive((Integer) v, (Integer) w, Color.cyan);
+        		//if (sim != null) sim.drive((Integer) v, (Integer) w, Color.cyan);
         		
         		if (d.get(w) == 999.9) {  // w not been visited add to kl
         			kl.insert(w, 999.9);  // add w and the distance from v to w, to the PriorityList
@@ -148,7 +151,11 @@ public class ShortestPath<V> {
 		
 		
 		// get table with d and p for source s (single-source shortest-path)
-		shortestPath(s, this.disGraph, this.d, this.p);
+		if (A_FLAG) {
+			shortestPath_A(s, g, this.disGraph, this.d, this.p);
+		} else {
+			shortestPath(s, this.disGraph, this.d, this.p);
+		}
 		
 	}
 

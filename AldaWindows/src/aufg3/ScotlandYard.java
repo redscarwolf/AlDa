@@ -64,7 +64,7 @@ public class ScotlandYard {
 			default:
 				weight = 1;
 			}
-			System.out.printf("%d %d %d %n",v, w, weight);
+			// System.out.printf("%d %d %d %n",v, w, weight);
 			
 			// process data
 			sy_graph.addVertex(v);
@@ -117,7 +117,7 @@ public class ScotlandYard {
 
 		sySp.searchShortestPath(1,173);
 		System.out.println("Distance = " + sySp.getDistance()); // 22.0
-
+		
 
 		// Simulation
 		SYSimulation sim;
@@ -151,6 +151,7 @@ public class ScotlandYard {
 }
 
 class ScotlandYardHeuristic implements Heuristic<Integer> {
+	private static final double H_RATE = 30; // 10 bis 80, Einfluss stark bis gering
 	Map<Integer, Entry> vertexCoordinates = new HashMap<Integer, Entry>();
 
 	public ScotlandYardHeuristic() throws FileNotFoundException {
@@ -200,16 +201,18 @@ class ScotlandYardHeuristic implements Heuristic<Integer> {
 		x1 = vertexCoordinates.get(u).x;
 		y1 = vertexCoordinates.get(u).y;
 		
-		x2 = vertexCoordinates.get(v).y;
+		x2 = vertexCoordinates.get(v).x;
 		y2 = vertexCoordinates.get(v).y;
 		
 		// Pythagoras Theorem
 		distance = Math.sqrt(Math.pow(x2 -x1, 2) + Math.pow(y2 -y1, 2));
-		System.out.printf("Reale Distanz: %f%n", distance);
+		//System.out.printf("Reale Distanz von %d nach %d: %f%n", u, v, distance);
 		
-		// Skaliere Rueckgabewert mit Faktor 1/10 bis 1/80.
-		distance /= 10.0;
-		System.out.printf("Gewichtete Distanz: %f%n", distance);
+		// Skaliere Rueckgabewert mit Faktor 10 bis 80.
+		distance /= H_RATE;
+//		System.out.printf("Gewichtete Distanz von %d(%.1f, %.1f)" + 
+//						  " nach %d(%.1f, %.1f): %.2f%n",
+//						  u, x1, y1, v, x2, y2, distance);
 		return distance;
 	}
 }
