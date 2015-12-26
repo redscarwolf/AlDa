@@ -24,34 +24,30 @@ public class myApp {
 			System.out.println("File net da");
 			return;
 		}
+		SYHeuristic.estimatedCost(9, 9);
 		SYHeuristic.estimatedCost(11, 1);
-		SYHeuristic.estimatedCost(11, 1);
-		
 		//Heuristic Ende
-		
-		/*
+
+
 		PriorityList<Integer> prioList = new PriorityList<>();
-		Integer v0 = 0;
-		Integer v1 = 1;
-		Integer v2 = 2;
 		
-		prioList.insert(v0, 0.0);
-		prioList.insert(v2, 6.);
-		prioList.insert(v1, 1.);
+		prioList.insert(1, 0.0);
+		prioList.insert(8, 2.0);
+		prioList.insert(9, 5.0);
+		prioList.insert(19, 7.2);
 		prioList.print();
 		
-		Integer i = prioList.deleteMin();
-		prioList.deleteMin();
+		Integer i = prioList.deleteMin(SYHeuristic, 19);
 		System.out.println(i);
 		prioList.print();
 		
-		if (!prioList.change(2, 7.0)) {
+		if (!prioList.change(9, 7.0)) {
 			System.out.println("ERROR change returned false: Vertex is not in PrioList.");
 		}
 		prioList.print();
 		
 		System.out.println(prioList.isEmty());
-		*/
+		
 		
 		/*
 		// init
