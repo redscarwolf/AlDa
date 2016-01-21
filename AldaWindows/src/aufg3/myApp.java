@@ -1,10 +1,16 @@
 package aufg3;
 
-
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import sim.SYSimulation;
 import aufg2.AdjacencyListUndirectedGraph;
 import aufg2.Edge;
+import aufg2.Graph;
 
 public class myApp {
 
