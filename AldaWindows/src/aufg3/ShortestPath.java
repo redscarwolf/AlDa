@@ -76,7 +76,7 @@ public class ShortestPath<V> {
 					d.put(w, d.get(v) + graph.getWeight(v, w));
 					// update PriorityList kl
 					kl.change(w, d.get(w));  // get just new added distance and add it to PriorityList
-					graph.getWeight(v, w);
+					graph.getWeight(v, w); //TODO glaube unnötig
 				}
 			}
 		}
@@ -122,7 +122,7 @@ public class ShortestPath<V> {
         			d.put(w, d.get(v) + graph.getWeight(v, w));
         			// update PriorityList kl
         			kl.change(w, d.get(w));  // get just new added distance and add it to PriorityList
-        			graph.getWeight(v, w);
+        			graph.getWeight(v, w);  //TODO glaube unnötig
         		}
         	}
         }
