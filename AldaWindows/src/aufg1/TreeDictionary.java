@@ -205,7 +205,7 @@ public class TreeDictionary<K extends Comparable<? super K>, V> implements
 			// gehe immer weiter nach links
 			p.left = getRemMinR(p.left, min);
 		}
-		p = balance(p); //TODO!!!!!
+		p = balance(p); //TODO!!!!!wurde von Bittel bei korrektur hinzugefügt, sollte eigentlich stimmen
 		return p; // gebe neu verkettung zurueck
 	}
 
